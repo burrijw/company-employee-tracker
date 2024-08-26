@@ -1,4 +1,4 @@
-const db = require("../config/db");
+import db from "../db/db";
 
 const TABLE_NAMES = Object.freeze(["department", "role", "employee"]);
 
@@ -50,7 +50,7 @@ const addItem = async (table, columns, values) => {
   return result.rows[0];
 };
 
-module.exports = {
+export default {
   getAll,
   addItem,
 };

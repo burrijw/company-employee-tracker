@@ -1,9 +1,6 @@
-const inquirer = require("inquirer");
-const db = require("./config/db");
-const Department = require("./models/department");
-const Employee = require("./models/employee");
-const Role = require("./models/role");
-const { addItem } = require("./queries/queries");
+import { prompt } from "inquirer";
+import db from "./db/db";
+import { addItem } from "./utils/utils";
 
 const startApp = async () => {
   try {
@@ -35,7 +32,7 @@ const startApp = async () => {
       " '-------------------------------------------------------------------------------------------------'",
     );
 
-    const answers = await inquirer.prompt([
+    const answers = await prompt([
       {
         type: "list",
         name: "action",
@@ -90,7 +87,7 @@ const startApp = async () => {
         break;
 
       case "Add a department":
-        const { departmentName } = await inquirer.prompt([
+        const { departmentName } = await prompt([
           {
             type: "input",
             name: "departmentName",
@@ -102,24 +99,23 @@ const startApp = async () => {
         break;
 
       case "Add a role":
-        const { roleTitle, roleSalary, roleDepartmentId } =
-          await inquirer.prompt([
-            {
-              type: "input",
-              name: "roleTitle",
-              message: "Enter the role title:",
-            },
-            {
-              type: "number",
-              name: "roleSalary",
-              message: "Enter the salary:",
-            },
-            {
-              type: "number",
-              name: "roleDepartmentId",
-              message: "Enter the department ID:",
-            },
-          ]);
+        const { roleTitle, roleSalary, roleDepartmentId } = await prompt([
+          {
+            type: "input",
+            name: "roleTitle",
+            message: "Enter the role title:",
+          },
+          {
+            type: "number",
+            name: "roleSalary",
+            message: "Enter the salary:",
+          },
+          {
+            type: "number",
+            name: "roleDepartmentId",
+            message: "Enter the department ID:",
+          },
+        ]);
         await addItem(
           "role",
           ["title", "salary", "department_id"],
@@ -129,26 +125,25 @@ const startApp = async () => {
         break;
 
       case "Add an employee":
-        const { firstName, lastName, roleId, managerId } =
-          await inquirer.prompt([
-            {
-              type: "input",
-              name: "firstName",
-              message: "Enter the employee’s first name:",
-            },
-            {
-              type: "input",
-              name: "lastName",
-              message: "Enter the employee’s last name:",
-            },
-            { type: "number", name: "roleId", message: "Enter the role ID:" },
-            {
-              type: "number",
-              name: "managerId",
-              message: "Enter the manager’s ID (if any):",
-              default: null,
-            },
-          ]);
+        const { firstName, lastName, roleId, managerId } = await prompt([
+          {
+            type: "input",
+            name: "firstName",
+            message: "Enter the employee’s first name:",
+          },
+          {
+            type: "input",
+            name: "lastName",
+            message: "Enter the employee’s last name:",
+          },
+          { type: "number", name: "roleId", message: "Enter the role ID:" },
+          {
+            type: "number",
+            name: "managerId",
+            message: "Enter the manager’s ID (if any):",
+            default: null,
+          },
+        ]);
         await addItem(
           "employee",
           ["first_name", "last_name", "role_id", "manager_id"],
@@ -158,7 +153,7 @@ const startApp = async () => {
         break;
 
       case "Update an employee role":
-        const { employeeId, newRoleId } = await inquirer.prompt([
+        const { employeeId, newRoleId } = await prompt([
           {
             type: "number",
             name: "employeeId",
