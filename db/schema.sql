@@ -1,7 +1,3 @@
-CREATE DATABASE tracker_db;
-
-\c tracker_db;
-
 CREATE TABLE IF NOT EXISTS department (
     id SERIAL PRIMARY KEY,
     name VARCHAR(30) UNIQUE NOT NULL
