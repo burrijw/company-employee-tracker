@@ -1,6 +1,6 @@
-import { prompt } from "inquirer";
-import db from "./db/db";
-import { addItem } from "./utils/utils";
+import inquirer from "inquirer";
+import db from "./db/db.js";
+import { addItem } from "./utils/utils.js";
 
 const startApp = async () => {
   try {
@@ -32,7 +32,7 @@ const startApp = async () => {
       " '-------------------------------------------------------------------------------------------------'",
     );
 
-    const answers = await prompt([
+    const answers = await inquirer.prompt([
       {
         type: "list",
         name: "action",

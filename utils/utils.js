@@ -1,4 +1,4 @@
-import db from "../db/db";
+import db from "../db/db.js";
 
 const TABLE_NAMES = Object.freeze(["department", "role", "employee"]);
 
@@ -23,12 +23,12 @@ function isValidTableName(table) {
  * @returns {Promise<Array>} A promise that resolves to an array of rows from the table.
  * @throws {Error} If the table name is not valid.
  */
-const getAll = async (table) => {
+export async function getAll(table) {
   isValidTableName(table);
   const query = `SELECT * FROM ${table}`;
   const result = await db.query(query);
   return result.rows;
-};
+}
 
 /**
  * Adds a new item to the specified table.
@@ -39,7 +39,7 @@ const getAll = async (table) => {
  * @returns {Promise<Object>} A promise that resolves to the inserted row.
  * @throws {Error} If the table name is not valid.
  */
-const addItem = async (table, columns, values) => {
+export async function addItem(table, columns, values) {
   isValidTableName(table);
   const query = `
         INSERT INTO ${table} (${columns.join(", ")})
@@ -48,9 +48,4 @@ const addItem = async (table, columns, values) => {
     `;
   const result = await db.query(query, values);
   return result.rows[0];
-};
-
-export default {
-  getAll,
-  addItem,
-};
+}
