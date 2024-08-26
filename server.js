@@ -1,7 +1,17 @@
 const inquirer = require('inquirer');
-const db = require('./config/db');
-const { 
-    viewDepartments, 
-    addDepartment, 
-    pdateEmployeeRole, 
-} = require('./models');
+const Department = require('./models/department');
+const Employee = require('./models/employee');
+const Role = require('./models/role');
+
+
+    console.log(" .-------------------------------------------------------------------------------------------------.");
+    console.log("|   _________    _______           __           ______     ___  ____     _________     _______      |");
+    console.log("|  |  _   _  |  |_   __ \         /  \        .' ___  |   |_  ||_  _|   |_   ___  |   |_   __ \     |");
+    console.log("|  |_/ | | \_|    | |__) |       / /\ \      / .'   \_|     | |_/ /       | |_  \_|     | |__) |    |");
+    console.log("|      | |        |  __ /       / ____ \     | |            |  __'.       |  _|  _      |  __ /     |");
+    console.log("|     _| |_      _| |  \ \_   _/ /    \ \_   \ `.___.'\    _| |  \ \_    _| |___/ |    _| |  \ \_   |");
+    console.log("|    |_____|    |____| |___| |____|  |____|   `._____.'   |____||____|  |_________|   |____| |___|  |");
+    console.log("|                                                                                                   |");
+    console.log(" '-------------------------------------------------------------------------------------------------'");
+
+    
